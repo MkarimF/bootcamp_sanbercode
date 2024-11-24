@@ -1,0 +1,22 @@
+{
+  "name": "bootcamp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "cypress": "^13.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MkarimF/bootcamp_sanbercode.git"
+  },
+  "author": "Muhammad Karim Fadillah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MkarimF/bootcamp_sanbercode/issues"
+  },
+  "homepage": "https://github.com/MkarimF/bootcamp_sanbercode#readme",
+  "description": ""
+}
