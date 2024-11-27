@@ -1,7 +1,7 @@
 describe('Fitur Login OrangeHRM', () => {
 
   // Positive Case
-  it.only('TC-001: Pengguna login dengan username dan password valid', () => {
+  it('TC-001: Pengguna login dengan username dan password valid', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login'); 
     
     // Masukkan Username
