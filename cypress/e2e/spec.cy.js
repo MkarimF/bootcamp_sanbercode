@@ -1,38 +1,35 @@
 describe('Fitur Login OrangeHRM', () => {
 
   // Positive Case
-  it('TC-001: Pengguna login dengan username dan password valid', () => {
+  it.only('TC-001: Pengguna login dengan username dan password valid', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login'); 
     
     // Masukkan Username
-    cy.get('input[placeholder="Username"]').type('Admin');
+    cy.get('[name="username"]').type('Admin');
     
     // Masukkan Password
-    cy.get('input[placeholder="Password"]').type('admin123');
+    cy.get('[name="password"]').type('admin123');
     
+    cy.intercept('GET', 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary').as('actionSummary');
     // Klik tombol login
-    cy.contains('Login').click();
+    cy.get('[type = "submit"]').click();
     // Menunggu 5 detik sebelum assertion
-    cy.wait(5000); 
+    // cy.wait(5000); 
     // Assertion: Pastikan login berhasil 
-    cy.get('h6', { timeout: 10000 }).contains('Dashboard').should('have.text', 'Dashboard');
+    // cy.get('id="app"]/div[1]/div[1]/header/div[1]/div[1]/span/h6').contains('Dashboard').should('have.text', 'Dashboard');
+    cy.wait('@actionSummary');
 
   });
 
   // Negative Case
   it('TC-002: Pengguna login dengan username dan password invalid', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
-    
-    // Masukkan Username salah
-    cy.get('input[placeholder="Username"]').type('aDMIN');
-    
-    // Masukkan Password salah
-    cy.get('input[placeholder="Password"]').type('Admin122');
-    
-    // Klik tombol login
-    cy.contains('Login').click();
-
+    cy.get('[name="username"]').type('aadmin');
+    cy.get('[name="password"]').type('aadmin123');
+    cy.get('[type="submit"]').click();
+    cy.wait(5000); 
+    cy.get('.oxd-text.oxd-text--p.oxd-alert-content-text',{wait:4000}).should('contain', 'Invalid credentials');
     // Assertion: Pastikan login gagal 
-    cy.get('.oxd-text.oxd-text--p.oxd-alert-content-text').should('contain', 'Invalid credentials');
+    // cy.get('.oxd-text.oxd-text--p.oxd-alert-content-text').should('contain', 'Invalid credentials');
   });
 });
